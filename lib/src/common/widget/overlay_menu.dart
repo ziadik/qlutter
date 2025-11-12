@@ -25,16 +25,13 @@ class OverlayMenu extends StatefulWidget {
 }
 
 /// State for widget OverlayMenu.
-class _OverlayMenuState extends State<OverlayMenu>
-    with SingleTickerProviderStateMixin, _PanelController {
+class _OverlayMenuState extends State<OverlayMenu> with SingleTickerProviderStateMixin, _PanelController {
   late final FlowDelegate _overlayDelegate;
 
   @override
   void initState() {
     super.initState();
-    _overlayDelegate = _OverlayMenuFlowDelegate(
-      animation: _panelAnimationController,
-    );
+    _overlayDelegate = _OverlayMenuFlowDelegate(animation: _panelAnimationController);
     // TODO(plugfox): implement right panel
   }
 
@@ -66,18 +63,14 @@ class _OverlayMenuState extends State<OverlayMenu>
   );
 }
 
-mixin _PanelController
-    on State<OverlayMenu>, SingleTickerProviderStateMixin<OverlayMenu> {
+mixin _PanelController on State<OverlayMenu>, SingleTickerProviderStateMixin<OverlayMenu> {
   late final AnimationController _panelAnimationController;
   final ValueNotifier<Widget?> _panelNotifier = ValueNotifier(null);
 
   @override
   void initState() {
     super.initState();
-    _panelAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 350),
-      vsync: this,
-    );
+    _panelAnimationController = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
   }
 
   @override
@@ -94,8 +87,7 @@ mixin _PanelController
   }
 
   Future<void> hidePanel() async {
-    if (_panelAnimationController.isDismissed && _panelNotifier.value == null)
-      return;
+    if (_panelAnimationController.isDismissed && _panelNotifier.value == null) return;
     await _panelAnimationController.reverse().catchError((_, __) {});
     _panelNotifier.value = null;
   }
@@ -129,93 +121,53 @@ class _OverlayMenuFlowDelegate extends FlowDelegate {
   }
 
   @override
-  BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) =>
-      switch (i) {
-        0 => BoxConstraints.tightFor(
-          width: railWidth,
-          height: constraints.maxHeight,
-        ),
-        1 => BoxConstraints.tightFor(
-          width: constraints.maxWidth - railWidth,
-          height: constraints.maxHeight,
-        ),
-        2 => BoxConstraints.tightFor(
-          width: constraints.maxWidth - railWidth,
-          height: constraints.maxHeight,
-        ),
-        _ => throw Exception('Invalid index: $i'),
-      };
+  BoxConstraints getConstraintsForChild(int i, BoxConstraints constraints) => switch (i) {
+    0 => BoxConstraints.tightFor(width: railWidth, height: constraints.maxHeight),
+    1 => BoxConstraints.tightFor(width: constraints.maxWidth - railWidth, height: constraints.maxHeight),
+    2 => BoxConstraints.tightFor(width: constraints.maxWidth - railWidth, height: constraints.maxHeight),
+    _ => throw Exception('Invalid index: $i'),
+  };
 
   @override
-  bool shouldRepaint(covariant _OverlayMenuFlowDelegate oldDelegate) =>
-      !identical(oldDelegate.animation, animation);
+  bool shouldRepaint(covariant _OverlayMenuFlowDelegate oldDelegate) => !identical(oldDelegate.animation, animation);
 }
 
 class _MenuRail extends StatelessWidget {
   const _MenuRail();
 
-  static final List<({String name, NavigationRailDestination destination})>
-  _destinations = [
-    (
-      name: Routes.level.name,
-      destination: const NavigationRailDestination(
-        icon: Icon(Icons.home),
-        label: Text('Levels'),
-      ),
-    ),
+  static final List<({String name, NavigationRailDestination destination})> _destinations = [
+    (name: Routes.level.name, destination: const NavigationRailDestination(icon: Icon(Icons.gamepad), label: Text('Levels'))),
 
     /* NavigationRailDestination(
         icon: Icon(Icons.favorite),
         label: Text('Favorite'),
       ), */
-    (
-      name: Routes.settings.name,
-      destination: const NavigationRailDestination(
-        icon: Icon(Icons.settings),
-        label: Text('Settings'),
-      ),
-    ),
+    (name: Routes.settings.name, destination: const NavigationRailDestination(icon: Icon(Icons.settings), label: Text('Settings'))),
   ];
 
   @override
   Widget build(BuildContext context) => Align(
-    alignment: Alignment.topLeft,
+    alignment: Alignment.topRight,
     child: SizedBox(
       width: _OverlayMenuFlowDelegate.railWidth,
       child: ValueListenableBuilder(
         valueListenable: Octopus.instance.observer,
         builder: (context, state, _) {
           final currentName = state.children.last.name;
-          int? currentIdx = _destinations.indexWhere(
-            (element) => element.name == currentName,
-          );
+          int? currentIdx = _destinations.indexWhere((element) => element.name == currentName);
           if (currentIdx == -1) currentIdx = null;
           return NavigationRail(
             selectedIndex: currentIdx,
-            destinations: _destinations
-                .map((e) => e.destination)
-                .toList(growable: false),
+            destinations: _destinations.map((e) => e.destination).toList(growable: false),
             onDestinationSelected: (index) {
               if (index == currentIdx) return;
               if (index == 0) {
-                Octopus.instance.setState(
-                  (state) => state
-                    ..removeWhere(
-                      (element) => element.name != Routes.level.name,
-                    ),
-                );
+                Octopus.instance.setState((state) => state..removeWhere((element) => element.name != Routes.level.name));
               } else {
                 final destination = _destinations[index];
                 Octopus.instance.setState((state) {
-                  state.removeWhere(
-                    (element) =>
-                        element.name != destination.name &&
-                        element.name != Routes.level.name,
-                  );
-                  if (state.children.none(
-                    (element) => element.name == destination.name,
-                  ))
-                    state.add(OctopusNode.mutable(destination.name));
+                  state.removeWhere((element) => element.name != destination.name && element.name != Routes.level.name);
+                  if (state.children.none((element) => element.name == destination.name)) state.add(OctopusNode.mutable(destination.name));
                   return state;
                 });
               }

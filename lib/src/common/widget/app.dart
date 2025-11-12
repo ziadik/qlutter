@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:qlutter/src/common/constant/config.dart';
+import 'package:qlutter/src/common/localization/localization.dart';
 import 'package:qlutter/src/common/router/router_state_mixin.dart';
 import 'package:qlutter/src/common/widget/overlay_menu.dart';
 import 'package:qlutter/src/common/widget/window_scope.dart';
 import 'package:qlutter/src/feature/game/widget/game_scope.dart';
 import 'package:qlutter/src/feature/settings/widget/settings_scope.dart';
-import 'package:qlutter/src/common/localization/localization.dart';
 
 /// {@template app}
 /// App widget.
@@ -48,9 +48,7 @@ class _AppState extends State<App> with RouterStateMixin {
       key: builderKey,
       title: Localization.of(context).title,
 
-      child: GameScope(
-        child: OverlayMenu(child: child ?? const SizedBox.shrink()),
-      ),
+      child: GameScope(child: OverlayMenu(child: child ?? const SizedBox.shrink())),
     ),
   );
 }

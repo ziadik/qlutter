@@ -10,5 +10,5 @@ class GameScreen extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => const Placeholder();
+  Widget build(BuildContext context) => Center(child: const Text("Game"));
 }

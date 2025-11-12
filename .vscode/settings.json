@@ -13,5 +13,6 @@
     "splashscreen",
     "vachtung",
     "ziidik"
-  ]
+  ],
+  "chat.disableAIFeatures": true
 }
