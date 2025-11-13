@@ -21,11 +21,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
-  # Routing
-  octopus: ^0.0.9
-   # Logger
-  l: ^5.0.0-pre.2
-  # Annotation
+
   meta: any
   json_annotation: ^4.8.1
 
@@ -102,11 +98,11 @@ flutter_intl:
   enabled: true
   class_name: GeneratedLocalization
   main_locale: en
-  arb_dir: lib/src/common/localization
-  output_dir: lib/src/common/localization/generated
+  arb_dir: lib/ver_3/common/localization
+  output_dir: lib/var_3/common/localization/generated
   use_deferred_loading: false
 
 flutter_gen:
-  output: lib/src/common/constant/
+  output: lib/ver_3/common/constant/
   line_length: 120
  
