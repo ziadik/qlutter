@@ -53,6 +53,15 @@ class _MapEditorState extends State<MapEditor> {
   int _currentLevelNumber = 1;
   bool _isLoading = false;
 
+  // Текущий индекс готового уровня из LevelMaps
+  int _currentPresetLevelIndex = 0;
+
+  // Флаг для отображения стен поверх игрового поля
+  bool _showWallsOverlay = false;
+
+  // Данные стен для оверлея (могут быть больше на +1)
+  List<String>? _wallsOverlayData;
+
   final TextEditingController _widthController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
 
@@ -324,6 +333,17 @@ class _MapEditorState extends State<MapEditor> {
                           decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(12)),
                           child: Text('Уровень $_currentLevelNumber', style: const TextStyle(color: Colors.white, fontSize: 12)),
                         ),
+
+                      // Кнопка для наложения стен
+                      if (_previewLevel != null)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: IconButton(
+                            icon: Icon(_showWallsOverlay ? Icons.layers : Icons.layers_outlined, color: _showWallsOverlay ? Colors.green : Colors.white70),
+                            onPressed: _toggleWallsOverlay,
+                            tooltip: _showWallsOverlay ? 'Скрыть стены' : 'Показать стены поверх',
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -336,6 +356,16 @@ class _MapEditorState extends State<MapEditor> {
     );
   }
 
+  void _toggleWallsOverlay() {
+    setState(() {
+      if (!_showWallsOverlay) {
+        // При включении оверлея, берем текущие стены из редактора
+        _wallsOverlayData = _gridToLevelMap();
+      }
+      _showWallsOverlay = !_showWallsOverlay;
+    });
+  }
+
   Widget _buildLevelPreview() {
     if (_previewLevel == null) {
       return const Center(
@@ -343,7 +373,6 @@ class _MapEditorState extends State<MapEditor> {
       );
     }
 
-    // Создаем кастомный виджет для отображения уровня
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white24, width: 2),
@@ -351,7 +380,84 @@ class _MapEditorState extends State<MapEditor> {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Container(width: 550, height: 550, color: const Color(0xFF50427D), child: _buildLevelGrid(_previewLevel!)),
+        child: Container(
+          width: 550,
+          height: 550,
+          color: const Color(0xFF50427D),
+          child: Stack(
+            children: [
+              // Игровое поле с элементами
+              _buildLevelGrid(_previewLevel!),
+
+              // Оверлей со стенами (если включен)
+              if (_showWallsOverlay && _wallsOverlayData != null) _buildWallsOverlay(_wallsOverlayData!),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWallsOverlay(List<String> wallsData) {
+    const double cellSize = 35;
+
+    // Размеры оверлея (могут быть больше на 1)
+    final int overlayHeight = wallsData.length;
+    final int overlayWidth = wallsData.isNotEmpty ? wallsData[0].split(' ').length : 0;
+
+    // Размеры игрового поля
+    final int gameHeight = _previewLevel?.height ?? 0;
+    final int gameWidth = _previewLevel?.width ?? 0;
+
+    // Рассчитываем смещение, если оверлей больше игрового поля
+    // В PlayGround поле всегда +1 по размеру, поэтому смещаем на 1 ячейку
+    final double offsetX = (overlayWidth > gameWidth) ? 0 : 0;
+    final double offsetY = (overlayHeight > gameHeight) ? 0 : 0;
+
+    return IgnorePointer(
+      child: Center(
+        child: Transform.translate(
+          offset: Offset(offsetX / 2, offsetY / 2),
+          child: SizedBox(
+            width: overlayWidth * cellSize,
+            height: overlayHeight * cellSize,
+            child: Stack(
+              children: [
+                for (int y = 0; y < overlayHeight; y++)
+                  for (int x = 0; x < overlayWidth; x++)
+                    // Проверяем, попадает ли ячейка оверлея в область игрового поля
+                    if (x < gameWidth && y < gameHeight)
+                      Positioned(left: x * cellSize, top: y * cellSize, child: _buildWallOverlayCell(wallsData[y].split(' ')[x], cellSize))
+                    else
+                      // Для дополнительных ячеек (крайних) рисуем с уменьшенной прозрачностью
+                      Positioned(left: x * cellSize, top: y * cellSize, child: _buildWallOverlayCell(wallsData[y].split(' ')[x], cellSize, isExtraCell: true)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWallOverlayCell(String wallSymbol, double size, {bool isExtraCell = false}) {
+    final WallType type = _symbolToWallType(wallSymbol);
+
+    if (type == WallType.N) return const SizedBox();
+
+    final painter = _getPainterForType(type);
+    final needsFlip = _needsFlipX(type);
+
+    if (painter == null) return const SizedBox();
+
+    return Opacity(
+      opacity: isExtraCell ? 0.3 : 0.7, // Крайние ячейки более прозрачные
+      child: Transform.flip(
+        flipX: needsFlip,
+        child: SizedBox(
+          width: size,
+          height: size,
+          child: CustomPaint(painter: painter, size: Size(size, size)),
+        ),
       ),
     );
   }
@@ -420,7 +526,7 @@ class _MapEditorState extends State<MapEditor> {
         padding: EdgeInsets.all(size * 0.15),
         child: Container(
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
             color: _getHoleColor(item.color).withOpacity(0.2),
             border: Border.all(color: _getHoleColor(item.color), width: size * 0.08),
             boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: size * 0.05, offset: Offset.zero)],
@@ -497,6 +603,8 @@ class _MapEditorState extends State<MapEditor> {
                       _previewLevel = level;
                       _currentLevelNumber = levelNumber;
                       _isLoading = false;
+                      // Сбрасываем оверлей при загрузке нового уровня
+                      _showWallsOverlay = false;
                     });
 
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Уровень $levelNumber загружен для превью')));
@@ -680,6 +788,11 @@ class _MapEditorState extends State<MapEditor> {
         } else {
           grid[row][column] = selectedTool;
         }
+
+        // Если оверлей включен, обновляем его при изменении сетки
+        if (_showWallsOverlay) {
+          _wallsOverlayData = _gridToLevelMap();
+        }
       });
     }
   }
@@ -808,6 +921,11 @@ class _MapEditorState extends State<MapEditor> {
         grid = newGrid;
         _widthController.text = importedWidth.toString();
         _heightController.text = importedHeight.toString();
+
+        // Обновляем оверлей если он включен
+        if (_showWallsOverlay) {
+          _wallsOverlayData = _gridToLevelMap();
+        }
       });
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Карта $importedWidth×$importedHeight успешно импортирована!')));
@@ -1012,6 +1130,11 @@ class _MapEditorState extends State<MapEditor> {
       });
 
       grid = newGrid;
+
+      // Обновляем оверлей если он включен
+      if (_showWallsOverlay) {
+        _wallsOverlayData = _gridToLevelMap();
+      }
     });
   }
 
@@ -1039,6 +1162,8 @@ class _MapEditorState extends State<MapEditor> {
                         subtitle: Text('${LevelMaps.levels[index].length}×${LevelMaps.levels[index].length}'),
                         onTap: () {
                           _loadLevel(index);
+                          // Также загружаем соответствующий уровень из LevelManager для превью
+                          _loadCorrespondingPreviewLevel(index + 1);
                           Navigator.pop(context);
                         },
                       ),
@@ -1052,6 +1177,23 @@ class _MapEditorState extends State<MapEditor> {
         actions: [TextButton(onPressed: () => Navigator.pop(context), child: const Text('Отмена'))],
       ),
     );
+  }
+
+  Future<void> _loadCorrespondingPreviewLevel(int levelNumber) async {
+    setState(() => _isLoading = true);
+    try {
+      final level = await LevelManager().loadLevel(levelNumber);
+      setState(() {
+        _previewLevel = level;
+        _currentLevelNumber = levelNumber;
+        _isLoading = false;
+        // Сбрасываем оверлей при загрузке нового уровня
+        _showWallsOverlay = false;
+      });
+    } catch (e) {
+      print('Error loading corresponding preview level: $e');
+      setState(() => _isLoading = false);
+    }
   }
 
   void _loadLevel(int levelIndex) {
@@ -1079,9 +1221,15 @@ class _MapEditorState extends State<MapEditor> {
         grid = newGrid;
         _widthController.text = levelWidth.toString();
         _heightController.text = levelHeight.toString();
+        _currentPresetLevelIndex = levelIndex;
+
+        // Обновляем оверлей если он включен
+        if (_showWallsOverlay) {
+          _wallsOverlayData = _gridToLevelMap();
+        }
       });
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Загружена карта: $levelIndex ($levelWidth×$levelHeight)')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Загружена карта: ${levelIndex + 1} (${LevelMaps.getLevelName(levelIndex)})')));
     } catch (e) {
       _showError('Ошибка при загрузке уровня: $e');
     }
