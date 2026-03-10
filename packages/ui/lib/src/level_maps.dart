@@ -16,12 +16,7 @@ class LevelMaps {
 
   static int width(int level) {
     final grid = LevelMaps.levels[level];
-    return grid.isNotEmpty
-        ? grid.fold<int>(
-            grid[0].length,
-            (min, r) => math.min(r.split(' ').length, min),
-          )
-        : 0;
+    return grid.isNotEmpty ? grid.fold<int>(grid[0].length, (min, r) => math.min(r.split(' ').length, min)) : 0;
   }
 
   static int height(int level) {
@@ -30,24 +25,8 @@ class LevelMaps {
   }
 
   static const List<List<String>> levels = [
-    [
-      'B B B B B B B',
-      'B LIT T T T RIT B',
-      'B LID D D LOD R B',
-      'B B B B L R B',
-      'B B B B L R B',
-      'B B B B LID RID B',
-      'B B B B B B B',
-    ],
-    [
-      'B B LIT RIT B B B',
-      'B LIT LOT ROT T RIT B',
-      'B L N N N ROT RIT',
-      'B L N N N ROD RID',
-      'B LID LOD N N R B',
-      'B B LID D D RID B',
-      'B B B B B B B',
-    ],
+    ['B B B B B B B', 'B LIT T T T RIT B', 'B LID D D LOD R B', 'B B B B L R B', 'B B B B L R B', 'B B B B LID RID B', 'B B B B B B B'],
+    ['B B LIT RIT B B B', 'B LIT LOT ROT T RIT B', 'B L N N N ROT RIT', 'B L N N N ROD RID', 'B LID LOD N N R B', 'B B LID D D RID B', 'B B B B B B B'],
     [
       'B B B B B B B B B B',
       'B B B B B LIT T T RIT B',
@@ -245,7 +224,7 @@ class LevelMaps {
       "B B B B B B B B B B B B B B",
       "B B B B B B B B B B B B B B",
     ],
-
+    //15
     [
       'B B B B B B B B B B B B B B',
       'B LIT T RIT LIT T T T T T T T RIT B',
@@ -261,11 +240,71 @@ class LevelMaps {
       'B L N N ROT LOT N N ROT LOT ROT LOT R B',
       'B LID D LOD ROD D D D D D D D RID B',
       'B B B LID RID B B B B B B B B B',
+    ], //16
+    [
+      "B B B B B B B B B B B B B B",
+      "B LIT T T T T T T T T T T RIT B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B LID D D D D D D D D D D RID B",
+      "B B B B B B B B B B B B B B",
+    ], //17
+    [
+      "B B B B B B LIT RIT B B B B B B",
+      "B LIT T T T T LOT ROT T T T T RIT B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N ROT RIT",
+      "B L N N N N N N N N N N N R",
+      "B L N N N N N N N N N N ROD RID",
+      "B L N N N N N N N N N N R B",
+      "B LID D D D D D D D D D D RID B",
+      "B B B B B B B B B B B B B B",
     ],
-    [],
-    [],
-    [],
-    [],
+    [
+      "B B B B B B B B B B B B B B",
+      "B LIT T T T T T T T T T T RIT B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B LID D D D D D D D D D D RID B",
+      "B B B B B B B B B B B B B B",
+    ],
+    [
+      "B B B B B B B B B B B B B B",
+      "B LIT T T T T T T T T T T RIT B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B LID D D D D D D D D D D RID B",
+      "B B B B B B B B B B B B B B",
+    ],
     [],
     [],
     [],
