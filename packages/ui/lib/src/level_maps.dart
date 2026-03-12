@@ -25,8 +25,8 @@ class LevelMaps {
   }
 
   static const List<List<String>> levels = [
-    ['B B B B B B B', 'B LIT T T T RIT B', 'B LID D D LOD R B', 'B B B B L R B', 'B B B B L R B', 'B B B B LID RID B', 'B B B B B B B'],
-    ['B B LIT RIT B B B', 'B LIT LOT ROT T RIT B', 'B L N N N ROT RIT', 'B L N N N ROD RID', 'B LID LOD N N R B', 'B B LID D D RID B', 'B B B B B B B'],
+    ['B B B B B B B', 'B LIT T T T RIT B', 'B LID D D LOD R B', 'B B B B L R B', 'B B B B L R B', 'B B B B LID RID B', 'B B B B B B B'], //0
+    ['B B LIT RIT B B B', 'B LIT LOT ROT T RIT B', 'B L N N N ROT RIT', 'B L N N N ROD RID', 'B LID LOD N N R B', 'B B LID D D RID B', 'B B B B B B B'], //1
     [
       'B B B B B B B B B B',
       'B B B B B LIT T T RIT B',
@@ -38,7 +38,7 @@ class LevelMaps {
       'B L N N N N N N R B',
       'B LID LOD ROD D LOD ROD D RID B',
       'B B LID RID B LID RID B B B',
-    ],
+    ], //2
     [
       "B B B B LIT RIT B B B B",
       "B LIT T T LOT ROT T RIT B B",
@@ -51,7 +51,7 @@ class LevelMaps {
       "B L N ROD LOD N ROD D RID B",
       "B LID D RID LID D RID B B B",
       "B B B B B B B B B B",
-    ],
+    ], //3
     [
       "B B B B B LIT RIT B B B",
       "B B LIT T T LOT ROT RIT B B",
@@ -63,9 +63,8 @@ class LevelMaps {
       "B LID LOD N N N N ROD RID B",
       "B B LID D LOD ROD D RID B B",
       "B B B B LID RID B B B B",
-    ],
+    ], //4
     [
-      //5
       "B B B B B B B B B B B",
       "B B B LIT T RIT B B B",
       "B B B L N R B B B",
@@ -79,8 +78,7 @@ class LevelMaps {
       "B B B L N R B B B",
       "B B B LID D RID B B B",
       "B B B B B B B B B B B",
-    ],
-    // 6
+    ], // 5
     [
       "B B B LIT RIT B B B B",
       "B B B L ROT RIT B B B",
@@ -92,7 +90,7 @@ class LevelMaps {
       "B B B LID LOD R B B B",
       "B B B B LID RID B B B",
       "B B B B B B B B B B",
-    ], // 7
+    ], // 6
     [
       "B B B B B B LIT RIT B B B B B B",
       "B LIT T T T T LOT ROT T T T T RIT B",
@@ -103,9 +101,8 @@ class LevelMaps {
       "B L N N R B LID RID B L N N R B",
       "B LID D D RID B B B B LID D D RID B",
       "B B B B B B B B B B B B B B",
-    ],
+    ], //7
     [
-      // 8
       "B B B B B B LIT RIT B B B B B",
       "B LIT T T T T LOT ROT T T T RIT B",
       "B L N N N 5 N N N N N R B",
@@ -120,111 +117,104 @@ class LevelMaps {
       "B LID D D D LOD ROD D D D D RID B",
       "B B B B B LID RID B B B B B B",
       "B B B B B B B B B B B B B",
-    ],
-    // 9
+    ], //8
+
     [
-      "B B B B B B B B B B B B B B B",
+      "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
       "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N 44 R B",
-      "B L N N N 6 N N N N N N R B",
-      "B L N N N N N N N N N 44 R B",
       "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N 44 R B",
-      "B L N 2 N N N N N N N 5 R B",
-      "B L N N N N N 6 N N N 44 R B",
-      "B L N N N N N N N N 2 ROD RID B",
-      "B L N N N N N N N N N ROT RIT B",
-      "B LID D D D D D D D D D D RID B",
-      "B B B B B B B B B B B B B B B",
-    ],
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N ROD RID B",
+      "B L ROD LOD ROD LOD N N N N N ROT RIT B",
+      "B LID RID LID RID LID D D D D D D RID B",
+      "B B B B B B B B B B B B B B",
+    ], //9
     [
-      // ten
-      "B B B LIT RIT B B B B B B B B B B",
-      "B LIT T LOT ROT T T T T T T RIT B B",
-      "B L 2 N 6 N N N N N N ROT RIT B",
+      "B B B B B B B B B B B B B B",
+      "B LIT T T T T T T T T T RIT B B",
+      "B L N N N N N N N N N ROT RIT B",
       "B L ROD LOD ROD LOD ROD LOD N N N N R B",
       "B L R L R L R L ROD LOD N N R B",
       "B L R L R L R L R L N N R B",
       "B L R L R L R L R L N N R B",
       "B L ROT LOT R L R L R L N N R B",
       "B L N N ROT LOT ROT LOT ROT LOT N N R B",
-      "B L N N N N N 44 N N N N R B",
-      "B L N 4 N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D LOD ROD D D RID B",
       "B B B B B B B B LID RID B B B B",
-    ],
+    ], //10
     [
-      // ELEVEN
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
       "B L N N N N N N N N N N R B",
       "B L N N ROD D D D D LOD N N R B",
       "B L N ROD LB T T T RIT L N N R B",
-      "B L N R L 44 44 44 R L N N R B",
-      "B L N R L 44 44 44 R L N N R B",
-      "B L N R L 44 44 ROD RID L N N R B",
+      "B L N R L N N N R L N N R B",
+      "B L N R L N N N R L N N R B",
+      "B L N R L N N ROD RID L N N R B",
       "B L N R LID D D RID B L N N R B",
       "B L N ROT T T T T T RB LOD N R B",
       "B L N N N N N N N ROT LOT N R B",
-      "B L N N N N 5 3 N N N N R B",
-      "B LID LOD ROD D D D D D D D D RID B",
-      "B B LID RID B B B B B B B B B B",
-    ],
-    [
-      //twelve
-      "B B B B B B B B LIT RIT B B B B",
-      "B LIT T T T T T T LOT ROT T T RIT B",
-      "B L N N N N N N N N N N ROT RIT",
-      "LIT LOT N N N N N N N N N N ROD RID",
-      "LID LOD N ROD LOD N ROD LOD N ROD LOD N R B",
-      "B L N ROT LOT 33 ROT LOT 33 ROT LOT N R B",
-      "B L N N 33 55 55 44 55 55 33 N R B",
-      "B L N N 33 44 44 55 44 44 33 N R B",
-      "B L N N 33 55 55 44 55 55 33 N R B",
-      "B L N N 33 33 33 33 33 33 33 N R B",
-      "B L N N N N N N N 2 N N R B",
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ],
+    ], //11
     [
-      // ТРИНАДЦАТЬ
+      "B B B B B B B B LIT RIT B B B B",
+      "B LIT T T T T T T LOT ROT T T RIT B",
+      "B L N N N N N N N N N N ROT RIT",
+      "B L N N N N N N N N N N ROD RID",
+      "B L N ROD LOD N ROD LOD N ROD LOD N R B",
+      "B L N ROT LOT N ROT LOT N ROT LOT N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B LID D D D D D D D D D D RID B",
+      "B B B B B B B B B B B B B B",
+    ], //12
+    [
       "B B B B B B B B B B B B B B",
       "B B LIT T T T T T T T T RIT B B",
       "B LIT LOT N N N ROD LOD N N N ROT RIT B",
-      "B L N N N 44 R L N 55 N N R B",
       "B L N N N N R L N N N N R B",
-      "B L ROD LOD 5 N R L N N ROD LOD R B",
+      "B L N N N N R L N N N N R B",
+      "B L ROD LOD N N R L N N ROD LOD R B",
       "B L R L N N R L N N R L R B",
-      "B L R L N 5 R L N 4 R L R B",
+      "B L R L N N R L N N R L R B",
       "B L R LID D LOD R L ROD D RID L R B",
       "B L R B B LID RID LID RID B B L R B",
       "B L ROT T T T T T T T T LOT R B",
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ],
+    ], //13
     [
-      // чЕТЫРНАДЦАТЬ
       "B B B B B B B B B B B B B B",
       "B LIT T RIT LIT T T T T RIT LIT T RIT B",
-      "B L ROD RID L 6 N N N R LID LOD R B",
+      "B L ROD RID L N N N N R LID LOD R B",
       "B LID RID LIT LOT N N N N ROT RIT LID RID B",
       "B LIT T LOT N N N N N N ROT T RIT B",
-      "B L 3 N N ROD D LOD N N N N R B",
+      "B L N N N ROD D LOD N N N N R B",
       "B L N N N R B LID LOD N N N R B",
       "B L N N N ROT RIT LIT LOT N N N R B",
-      "LIT LOT N N N N ROT LOT 44 N N N R B",
-      "LID D D LOD N N N N N N ROD D RID B",
+      "B L N N N N ROT LOT N N N N R B",
+      "B LID D LOD N N N N N N ROD D RID B",
       "B LIT RIT LID LOD N N N N ROD RID LIT RIT B",
       "B L ROT RIT L N N N N R LIT LOT R B",
       "B LID D RID LID D D D D RID LID D RID B",
       "B B B B B B B B B B B B B B",
-      "B B B B B B B B B B B B B B",
-    ],
-    //15
+    ], //14
     [
       'B B B B B B B B B B B B B B',
       'B LIT T RIT LIT T T T T T T T RIT B',
@@ -240,7 +230,7 @@ class LevelMaps {
       'B L N N ROT LOT N N ROT LOT ROT LOT R B',
       'B LID D LOD ROD D D D D D D D RID B',
       'B B B LID RID B B B B B B B B B',
-    ], //16
+    ], //15
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -256,7 +246,7 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //17
+    ], //16
     [
       "B B B B B B LIT RIT B B B B B B",
       "B LIT T T T T LOT ROT T T T T RIT B",
@@ -272,7 +262,7 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //18
+    ], //19
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -288,7 +278,7 @@ class LevelMaps {
       "B L N ROT T T T T T T T LOT R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //19
+    ], //20
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T RIT B LIT RIT B",
@@ -304,26 +294,26 @@ class LevelMaps {
       "B L ROT T T T T T T RIT LID LOD R B",
       "B LID D D D D D D D RID B LID RID B",
       "B B B B B B B B B B B B B B",
-    ], //20
-    [
-      "B B B B B B B B B B B B B B",
-      "B LIT T T T T T T T T T T RIT B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B L N N N N N N N N N N R B",
-      "B LID D D D D D D D D D D RID B",
-      "B B B B B B B B B B B B B B",
     ], //21
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B L N N N N N N N N N N R B",
+      "B LID D D D D D D D D D D RID B",
+      "B B B B B B B B B B B B B B",
+    ], //22
+    [
+      "B B B B B B B B B B B B B B",
+      "B LIT T T T T T T T T T T RIT B",
       "B LID LOD N N N N N N N N ROD RID B",
       "B LIT LOT N N N N N N N N ROT RIT B",
       "B L N N N N N N N N N N R B",
@@ -336,7 +326,7 @@ class LevelMaps {
       "B LIT LOT N N N N N N N N ROT RIT B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //22
+    ], //23
     [
       "B B B B B B B B B B B B B B",
       "LIT T T T T T T T T T T T RIT B",
@@ -352,7 +342,7 @@ class LevelMaps {
       "LID LOD N N N N N N N N N N R B",
       "B LID D D D D D D LOD ROD D D RID B",
       "B B B B B B B B LID RID B B B B",
-    ], //23
+    ], //24
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
