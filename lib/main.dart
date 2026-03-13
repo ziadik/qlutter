@@ -7,6 +7,8 @@
 //     as material
 //     show runApp, WidgetsFlutterBinding;
 import 'package:flutter/material.dart';
+import 'package:qlutter/map_editor/map_editor.dart';
+import 'package:qlutter/map_editor/playground_ui.dart';
 import 'package:qlutter/ver_2/app.dart';
 import 'package:qlutter/ver_2/game/level_manager.dart';
 import 'package:qlutter/ver_2/models/app_state.dart';
@@ -22,18 +24,42 @@ void main() async {
   final currentLevel = await StorageService.getCurrentLevel();
   final completedLevels = await StorageService.getCompletedLevels();
 
-  final initialState = AppState(
-    currentLevel: currentLevel,
-    completedLevels: completedLevels,
-    isLoading: false,
-    levelManager: levelManager,
-  );
+  final initialState = AppState(currentLevel: currentLevel, completedLevels: completedLevels, isLoading: false, levelManager: levelManager);
 
-  runApp(QOOXApp(initialState: initialState));
+  //runApp(QOOXApp(initialState: initialState));
+  runApp(MaterialApp(home: HomePage(appState: initialState)));
 }
 
+class HomePage extends StatelessWidget {
+  const HomePage({required this.appState, super.key});
 
+  final AppState appState;
 
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: const Text('Wall System')),
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => QOOXApp(initialState: appState)));
+            },
+            child: const Text('Просмотр поля'),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const MapEditor()));
+            },
+            child: const Text('Редактор карт'),
+          ),
+        ],
+      ),
+    ),
+  );
+}
 
 
 

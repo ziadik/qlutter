@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ui/src/level_maps.dart';
-import 'wall_ui.dart';
+import 'playground_ui.dart';
 import 'wall_painter.dart';
 
 class MapEditor extends StatefulWidget {
@@ -17,6 +17,9 @@ class _MapEditorState extends State<MapEditor> {
   List<List<WallType>> grid = [];
   WallType selectedTool = WallType.L;
   bool isErasing = false;
+
+  // Разделитель экрана (0.6 = 60% редактор, 40% превью)
+  double editorSplitRatio = 0.6;
 
   final TextEditingController _widthController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
@@ -117,14 +120,19 @@ class _MapEditorState extends State<MapEditor> {
     }
   }
 
+  // Преобразование текущей сетки в формат для PlayGround
+  List<String> _gridToLevelMap() {
+    return grid.map((row) {
+      return row.map(_wallTypeToSymbol).join(' ');
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Редактор карт', style: TextStyle(color: Colors.white)),
-
+        title: const Text('Редактор карт с превью', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF50427D),
-
         actions: [
           IconButton(icon: const Icon(Icons.collections), onPressed: _loadPresetMap, tooltip: 'Готовые карты', color: Colors.white70),
           IconButton(icon: const Icon(Icons.aspect_ratio), onPressed: _changeGridSize, tooltip: 'Размер карты', color: Colors.white70),
@@ -141,11 +149,69 @@ class _MapEditorState extends State<MapEditor> {
           // Переключатель режима
           _buildModeSwitch(),
 
-          // Сетка редактора
+          // Разделенный экран: редактор и превью
           Expanded(
-            child: Container(
-              color: const Color(0xFF50427D),
-              child: Center(child: _buildEditorGrid()),
+            child: Row(
+              children: [
+                // Левая часть - редактор
+                Expanded(
+                  flex: (editorSplitRatio * 100).toInt(),
+                  child: Container(
+                    color: const Color(0xFF50427D),
+                    child: Center(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SingleChildScrollView(scrollDirection: Axis.vertical, child: _buildEditorGrid()),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Вертикальный разделитель
+                GestureDetector(
+                  onHorizontalDragUpdate: (details) {
+                    setState(() {
+                      editorSplitRatio += details.delta.dx / context.size!.width;
+                      editorSplitRatio = editorSplitRatio.clamp(0.3, 0.8);
+                    });
+                  },
+                  child: Container(
+                    width: 8,
+                    color: Colors.grey[300],
+                    child: const VerticalDivider(thickness: 1, width: 1, color: Colors.grey),
+                  ),
+                ),
+
+                // Правая часть - превью PlayGround
+                Expanded(
+                  flex: (100 - editorSplitRatio * 100).toInt(),
+                  child: Container(
+                    color: Colors.grey[900],
+                    child: Column(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Превью уровня',
+                            style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: PlayGround(
+                              h: gridHeight,
+                              w: gridWidth,
+                              levelId: -1, // Используем кастомный уровень
+                              customLevel: _gridToLevelMap(),
+                              elementSize: 40, // Меньший размер для превью
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -335,6 +401,7 @@ class _MapEditorState extends State<MapEditor> {
     final wallType = grid[row][column];
     final painter = _getPainterForType(wallType);
     final needsFlip = _needsFlipX(wallType);
+
     return Positioned(
       left: column * cellSize,
       top: row * cellSize,
@@ -533,6 +600,10 @@ class _MapEditorState extends State<MapEditor> {
         return WallType.ROD;
       case 'B':
         return WallType.B;
+      case 'LB':
+        return WallType.LB;
+      case 'RB':
+        return WallType.RB;
       case 'N':
         return WallType.N;
       default:
@@ -703,14 +774,6 @@ class _MapEditorState extends State<MapEditor> {
 
       for (final line in levelData) {
         final symbols = line.split(' ').where((symbol) => symbol.isNotEmpty).toList();
-
-        // if (symbols.length < levelSize) {
-        //   _showError(
-        //     'Неверный формат уровня: строка содержит ${symbols.length} элементов вместо $levelSize',
-        //   );
-        //   return;
-        // }
-
         final row = symbols.map(_symbolToWallType).toList();
         newGrid.add(row);
       }
