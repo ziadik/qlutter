@@ -6,8 +6,7 @@ class StorageService {
   static const String _currentLevelKey = 'current_level';
   static const String _completedLevelsKey = 'completed_levels';
 
-  static Future<SharedPreferences> get _prefs async =>
-      await SharedPreferences.getInstance();
+  static Future<SharedPreferences> get _prefs async => await SharedPreferences.getInstance();
 
   static Future<int> getCurrentLevel() async {
     final prefs = await _prefs;
@@ -22,8 +21,7 @@ class StorageService {
   static Future<Set<int>> getCompletedLevels() async {
     final prefs = await _prefs;
     //TODO: Верную в зад после теста
-    const completedString =
-        '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16'; // = prefs.getString(_completedLevelsKey) ?? '';
+    const completedString = '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40'; // = prefs.getString(_completedLevelsKey) ?? '';
     if (completedString.isEmpty) return <int>{};
     return completedString.split(',').map(int.parse).toSet();
   }
@@ -43,9 +41,7 @@ class StorageService {
   static Future<bool> isLevelUnlocked(int level) async {
     if (level == 1) return true; // Первый уровень всегда открыт
     final completedLevels = await getCompletedLevels();
-    return completedLevels.contains(
-      level - 1,
-    ); // Уровень открыт если пройден предыдущий
+    return completedLevels.contains(level - 1); // Уровень открыт если пройден предыдущий
   }
 
   static Future<void> clearProgress() async {
