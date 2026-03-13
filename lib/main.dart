@@ -17,26 +17,23 @@ import 'package:qlutter/ver_2/services/storage_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // final levelManager = LevelManager();
-  // await levelManager.initialize();
+  final levelManager = LevelManager();
+  await levelManager.initialize();
 
-  // // Загружаем начальное состояние
-  // final currentLevel = await StorageService.getCurrentLevel();
-  // final completedLevels = await StorageService.getCompletedLevels();
+  // Загружаем начальное состояние
+  final currentLevel = await StorageService.getCurrentLevel();
+  final completedLevels = await StorageService.getCompletedLevels();
 
-  // final initialState = AppState(
-  //   currentLevel: currentLevel,
-  //   completedLevels: completedLevels,
-  //   isLoading: false,
-  //   levelManager: levelManager,
-  // );
+  final initialState = AppState(currentLevel: currentLevel, completedLevels: completedLevels, isLoading: false, levelManager: levelManager);
 
-  // runApp(QOOXApp(initialState: initialState));
-  runApp(const MaterialApp(home: HomePage()));
+  //runApp(QOOXApp(initialState: initialState));
+  runApp(MaterialApp(home: HomePage(appState: initialState)));
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({required this.appState, super.key});
+
+  final AppState appState;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -47,7 +44,7 @@ class HomePage extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const PlayGround(h: 10, w: 10, elementSize: 50, levelId: 4)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => QOOXApp(initialState: appState)));
             },
             child: const Text('Просмотр поля'),
           ),
