@@ -25,9 +25,9 @@ class LevelMaps {
   }
 
   static const List<List<String>> levels = [
-    // Уровень 0
+    // Уровень 0 (1)
     ["B B B B B B B", "B LIT T T T RIT B", "B LID D D LOD R B", "B B B B L R B", "B B B B L R B", "B B B B LID RID B", "B B B B B B B"],
-    // Уровень 1
+    // Уровень 1 (2)
     ["B B LIT RIT B B B", "B LIT LOT ROT T RIT B", "B L N N N ROT RIT", "B L N N N ROD RID", "B LID LOD N N R B", "B B LID D D RID B", "B B B B B B B"],
     // Уровень 2
     [
@@ -69,7 +69,7 @@ class LevelMaps {
       "B B LID D LOD ROD D RID B B",
       "B B B B LID RID B B B B",
     ],
-    // Уровень 5
+    // Уровень 5 (6)
     [
       "B B B B B B B B B",
       "B B B LIT T RIT B B B",
@@ -110,7 +110,7 @@ class LevelMaps {
       "B LID D D RID B B B B LID D D RID B",
       "B B B B B B B B B B B B B B",
     ],
-    // Уровень 8
+    // Уровень 8 (9)
     [
       "B B B B B B LIT RIT B B B B B",
       "B LIT T T T T LOT ROT T T T RIT B",
@@ -127,6 +127,7 @@ class LevelMaps {
       "B B B B B LID RID B B B B B B",
       "B B B B B B B B B B B B B",
     ],
+    // Уровень 9 (10)
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -142,7 +143,8 @@ class LevelMaps {
       "B L ROD LOD ROD LOD N N N N N ROT RIT B",
       "B LID RID LID RID LID D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //9
+    ],
+    // Уровень 10 (11)
     [
       "B B B LIT RIT B B B B B B B B B",
       "B LIT T LOT ROT T T T T T T RIT B B",
@@ -158,7 +160,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D LOD ROD D D RID B",
       "B B B B B B B B LID RID B B B B",
-    ], //10
+    ],
+    // Уровень 11
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -174,7 +177,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID LOD ROD D D D D D D D D RID B",
       "B B LID RID B B B B B B B B B B",
-    ], //11
+    ],
+    // Уровень 12
     [
       "B B B B B B B B LIT RIT B B B B",
       "B LIT T T T T T T LOT ROT T T RIT B",
@@ -190,7 +194,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //12
+    ],
+    // Уровень 13
     [
       "B B B B B B B B B B B B B B",
       "B B LIT T T T T T T T T RIT B B",
@@ -206,7 +211,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //13
+    ],
+    // Уровень 14 (15)
     [
       "B B B B B B B B B B B B B B",
       "B LIT T RIT LIT T T T T RIT LIT T RIT B",
@@ -222,8 +228,8 @@ class LevelMaps {
       "B L ROT RIT L N N N N R LIT LOT R B",
       "B LID D RID LID D D D D RID LID D RID B",
       "B B B B B B B B B B B B B B",
-    ], //14
-    // Уровень 15
+    ],
+    // Уровень 15 (16)
     [
       "B B B B B B B B B B B B B B",
       "B LIT T RIT LIT T T T T T T T RIT B",
@@ -232,14 +238,15 @@ class LevelMaps {
       "B L R L ROD D LOD N ROT RIT L N R B",
       "B L ROT LOT R LIT LOT N N ROT LOT N R B",
       "LIT LOT N N ROT LOT N N ROD LOD N N R B",
-      "LID LOD N N N N N ROD RID L N N R B",
-      "B L N ROD LOD N N ROT T LOT ROD LOD R B",
+      "LID LOD N N N N N ROD RID L ROD LOD R B",
+      "B L N ROD LOD N N ROT T LOT R L R B",
       "B L N R LID LOD N N ROD D RID L R B",
       "B L N ROT RIT L N N R LIT RIT L R B",
       "B L N N ROT LOT N N ROT LOT ROT LOT R B",
       "B LID D LOD ROD D D D D D D D RID B",
       "B B B LID RID B B B B B B B B B",
     ],
+    // Уровень 16
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -255,7 +262,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //17
+    ],
+    // Уровень 17
     [
       "B B B B B B LIT RIT B B B B B B",
       "B LIT T T T T LOT ROT T T T T RIT B",
@@ -271,7 +279,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //18
+    ],
+    // Уровень 18 (19)
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -287,7 +296,8 @@ class LevelMaps {
       "B L N ROT T T T T T T T LOT R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //19
+    ],
+    // Уровень 19 (20)
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T RIT B LIT RIT B",
@@ -303,7 +313,8 @@ class LevelMaps {
       "B L ROT T T T T T T RIT LID LOD R B",
       "B LID D D D D D D D RID B LID RID B",
       "B B B B B B B B B B B B B B",
-    ], //20
+    ],
+    // Уровень 20
     [
       "LIT T T RIT B B B B B LIT T T T RIT",
       "L N N ROT T T T T T LOT N N N R",
@@ -319,7 +330,8 @@ class LevelMaps {
       "B L N N N N N N N N N N N R",
       "B LID D LOD ROD D D D D D D LOD N R",
       "B B B LID RID B B B B B B LID D RID",
-    ], //21
+    ],
+    // Уровень 21
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -335,7 +347,8 @@ class LevelMaps {
       "B LIT LOT N N N N N N N N ROT RIT B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //22
+    ],
+    // Уровень 22
     [
       "B B B B B B B B B B B B B B",
       "LIT T T T T T T T T T T T RIT B",
@@ -351,7 +364,8 @@ class LevelMaps {
       "LID LOD N N N N N N N N N N R B",
       "B LID D D D D D D LOD ROD D D RID B",
       "B B B B B B B B LID RID B B B B",
-    ], //23
+    ],
+    // Уровень 23 (24)
     [
       "B B B B B B B B B B B B B B",
       "B B LIT T T T T T T T T T RIT B",
@@ -367,7 +381,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], //24
+    ],
+    // Уровень 24
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T T T T T T T T RIT B",
@@ -383,7 +398,8 @@ class LevelMaps {
       "B L N N ROT T T T T LOT N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], // 25
+    ],
+    // Уровень 25 (26)
     [
       "B B B B B B B B B LIT RIT B B B",
       "B LIT T T T T T T T LOT ROT T RIT B",
@@ -399,7 +415,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D LOD ROD D D D D D D RID B",
       "B B B B LID RID B B B B B B B B",
-    ], //26
+    ],
+    // Уровень 26
     [
       "B B B B B B B B B B B B B B",
       "B B B LIT T T T T T T T T RIT B",
@@ -415,7 +432,8 @@ class LevelMaps {
       "B L N N N N N N N N ROT RIT B B",
       "B LID D D D D D D D D LOD R B B",
       "B B B B B B B B B B LID RID B B",
-    ], //27
+    ],
+    // Уровень 27
     [
       "LIT RIT B B B B B B B B B B LIT RIT",
       "LID LB T T T T T T T T T T RB RID",
@@ -431,7 +449,8 @@ class LevelMaps {
       "B L N N N N ROD LOD N N N N R B",
       "LIT RB D D D D RID LID D D D D LB RIT",
       "LID RID B B B B B B B B B B LID RID",
-    ], // 28
+    ],
+    // Уровень 28
     [
       "LIT T T T T T T T T T T T T RIT",
       "L N N N N N N N N N N N N R",
@@ -447,7 +466,8 @@ class LevelMaps {
       "L N N N N N N N N N N N N R",
       "L N N N N N N N N N N N N R",
       "LID D D D D D D D D D D D D RID",
-    ], // 29 + 1
+    ],
+    // Уровень 29 (30)
     [
       "LIT RIT LIT RIT LIT RIT LIT RIT LIT RIT LIT RIT B B",
       "LID LB LOT ROT LOT ROT LOT ROT LOT ROT LOT ROT RIT B",
@@ -463,7 +483,8 @@ class LevelMaps {
       "LIT LOT N N N N N N N N N N ROD RID",
       "LID D LOD ROD LOD ROD LOD ROD LOD ROD LOD ROD LB RIT",
       "B B LID RID LID RID LID RID LID RID LID RID LID RID",
-    ], // 30
+    ],
+    // Уровень 30 (31)
     [
       "B B B B B B B LIT RIT B B B B B",
       "B LIT T T T T T LOT ROT T T T RIT B",
@@ -479,7 +500,8 @@ class LevelMaps {
       "LID LOD ROD D D LOD N N ROD D D LOD R B",
       "B LID RID LIT RIT LID D LOD R LIT RIT LID RID B",
       "B B B LID RID B B LID RID LID RID B B B",
-    ], //31
+    ],
+    // Уровень 31
     [
       "B B B B B B B LIT RIT B B B B B",
       "B LIT T T T T T LOT ROT T T T RIT B",
@@ -495,7 +517,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "B LID D D D D D D D D D D RID B",
       "B B B B B B B B B B B B B B",
-    ], // 32
+    ],
+    // Уровень 32
     [
       "LIT RIT B B B B LIT T T RIT B B LIT RIT",
       "LID LB T T T T LOT N N ROT T T RB RID",
@@ -511,7 +534,8 @@ class LevelMaps {
       "B L N N N N N N N N N N R B",
       "LIT RB D D D LOD ROD D D D D D LB RIT",
       "LID RID B B B LID RID B B B B B LID RID",
-    ], // 33
+    ],
+    // Уровень 33
     [
       "B B LIT T T RIT B B B LIT T T T RIT",
       "B B LID D LOD ROT T RIT B L ROD D D RID",
@@ -527,7 +551,8 @@ class LevelMaps {
       "LIT T RIT LIT LOT R B L R LIT LOT ROD LOD R",
       "LID LOD ROT LOT ROD RID B L ROT LOT ROD RID L R",
       "B LID D D RID B B LID D D RID B LID RID",
-    ], //34
+    ],
+    // Уровень 34 (35)
     [
       "LIT RIT LIT RIT LIT RIT LIT RIT LIT RIT LIT RIT LIT RIT",
       "LID LB RB LB RB LB RB LB RB LB RB LB RB RID",
@@ -543,7 +568,8 @@ class LevelMaps {
       "LID LB RB LOD ROD LOD ROD LOD ROD LOD ROD LB RB RID",
       "LIT RB LB RB LB RB LB RB LB RB LB RB LB RIT",
       "LID RID LID RID LID RID LID RID LID RID LID RID LID RID",
-    ], //35
+    ],
+    // Уровень 35 (36)
     [
       "B B B B LIT RIT B B LIT RIT B B B B",
       "B LIT T T LOT ROT T T LOT ROT T T RIT B",
@@ -559,7 +585,8 @@ class LevelMaps {
       "L N N N N N N N N N N N ROT RIT",
       "L N N N N N N N N N N N N R",
       "LID D D D D D D D D D D D D RID",
-    ], //36
+    ],
+    // Уровень 36
     [
       "B B LIT RIT B B LIT RIT B B B B B B",
       "B LIT LOT R B B L ROT RIT LIT T T RIT B",
@@ -575,7 +602,8 @@ class LevelMaps {
       "LID LOD N R B B L N R L N N R B",
       "B L ROD RID B B LID D RID LID D D RID B",
       "B LID RID B B B B B B B B B B B",
-    ], // 37
+    ],
+    // Уровень 37
     [
       "LIT T RIT B B B B B B B B LIT T RIT",
       "L N ROT T T T RIT LIT T T T LOT N R",
@@ -591,7 +619,8 @@ class LevelMaps {
       "LIT LOT N N N N ROD LOD N N N N ROT RIT",
       "L N ROD D D D RID LID LOD ROD D LOD N R",
       "LID D RID B B B B B LID RID B LID D RID",
-    ], //38
+    ],
+    // Уровень 38 (39)
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T T RIT LIT T T T T T RIT B",
@@ -607,7 +636,8 @@ class LevelMaps {
       "B L ROT LOT N N N N N ROD LOD N R B",
       "B LID D D D D D D D RID LID D RID B",
       "B B B B B B B B B B B B B B",
-    ], //39
+    ],
+    // Уровень 39 (40)
     [
       "B B B B B B B B B B B B B B",
       "B LIT T T RIT B B B B B B B B B",
@@ -620,7 +650,7 @@ class LevelMaps {
       "B B B B B B B B B L N N R B",
       "B B B B B B B B B LID LOD ROD RID B",
       "B B B B B B B B B B LID RID B B",
-    ], //40
+    ],
     // Уровень 40 (41)
     [
       "B B LIT T T T T T T T T RIT B B",
@@ -745,19 +775,20 @@ class LevelMaps {
     ],
     // Уровень 48 (49)
     [
+      "B B B B B B B B LIT RIT B B B B",
+      "B LIT RIT LIT T T T T LOT ROT T T RIT B",
+      "B L ROT LOT ROD D D LOD N N N ROD RID B",
+      "B L ROD D RID LIT RIT LID D LOD ROD RID B B",
+      "B L ROT T T LOT ROT T T LOT ROT T RIT B",
+      "B L ROD D D LOD ROD D D LOD ROD D RID B",
+      "B L R LIT RIT L R LIT RIT L R LIT RIT B",
+      "B L R L R L R L ROT LOT R L R B",
+      "B L R L ROT LOT ROT LOT ROD LOD ROT LOT ROT RIT",
+      "B L R L ROD LOD ROD LOD R LID D LOD ROD RID",
+      "B L R LID RID L R L ROT T T LOT R B",
+      "B L ROT T T LOT ROT LOT ROD D D LOD R B",
+      "B LID D D D D D D RID B B LID RID B",
       "B B B B B B B B B B B B B B",
-      "B B LIT RIT B B B B LIT T T RIT B B",
-      "B B L ROT T T T T LOT ROD LOD R B B",
-      "B LIT LOT ROD LOD ROD D LOD N ROT LOT R B B",
-      "B LID LOD R L ROT RIT LID D D LOD R B B",
-      "B B L R LID LOD ROT RIT LIT RIT L R B B",
-      "B B L R LIT LOT N ROT LOT R L R B B",
-      "B B L R LID D LOD N N R L R B B",
-      "B B L ROT T RIT LID D LOD R L R B B",
-      "B B L ROD LOD R LIT T LOT R L R B B",
-      "B LIT LOT ROT LOT ROT LOT N N ROT LOT ROT RIT B",
-      "B LID D D D D D D D D LOD ROD RID B",
-      "B B B B B B B B B B LID RID B B",
     ],
     // Уровень 49 (50)
     [
