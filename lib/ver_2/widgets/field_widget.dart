@@ -15,13 +15,7 @@ import 'package:qlutter/ver_2/widgets/level_stats_widget.dart';
 import 'package:ui/ui.dart';
 
 class FieldWidget extends StatefulWidget {
-  const FieldWidget({
-    required this.level,
-    required this.levelNumber,
-    required this.wrap_level_navigation,
-    super.key,
-    this.onLevelComplete,
-  });
+  const FieldWidget({required this.level, required this.levelNumber, required this.wrap_level_navigation, super.key, this.onLevelComplete});
   final Level level;
   final int levelNumber;
   final VoidCallback? onLevelComplete;
@@ -77,11 +71,7 @@ class _FieldWidgetState extends State<FieldWidget> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        _elementSize = _calculateOptimalElementSize(
-          constraints,
-          isLandscape,
-          mediaQuery,
-        );
+        _elementSize = _calculateOptimalElementSize(constraints, isLandscape, mediaQuery);
         final fieldWidth = (_elementSize * (_engine.level.width + 1)) + 4;
         final fieldHeight = (_elementSize * (_engine.level.height + 1)) + 4;
 
@@ -92,11 +82,7 @@ class _FieldWidgetState extends State<FieldWidget> {
             widget.wrap_level_navigation(
               SizedBox(
                 width: fieldWidth - ((isLandscape ? 1 : 3) * _elementSize),
-                child: LevelStatsWidget(
-                  stats: _engine.stats,
-                  initialBallsCount: _engine.initialBallsCount,
-                  currentBallsCount: _engine.ballsCount,
-                ),
+                child: LevelStatsWidget(stats: _engine.stats, initialBallsCount: _engine.initialBallsCount, currentBallsCount: _engine.ballsCount),
               ),
             ),
             const Spacer(),
@@ -143,9 +129,7 @@ class _FieldWidgetState extends State<FieldWidget> {
                     // _buildPlayGround(),
                     _buildFieldGrid(),
                     // Анимированные шары поверх статичного поля
-                    if (_engine.isAnimating &&
-                        _engine.currentAnimatedBall != null)
-                      _buildAnimatedBall(_engine.currentAnimatedBall!),
+                    if (_engine.isAnimating && _engine.currentAnimatedBall != null) _buildAnimatedBall(_engine.currentAnimatedBall!),
                   ],
                 ),
                 h: _engine.level.height + 1,
@@ -162,11 +146,7 @@ class _FieldWidgetState extends State<FieldWidget> {
   Widget _buildAnimatedBall(AnimatedBall animatedBall) => Positioned(
     left: animatedBall.currentPosition.x * _elementSize,
     top: animatedBall.currentPosition.y * _elementSize,
-    child: AdvancedAnimatedBallWidget(
-      animatedBall: animatedBall,
-      elementSize: _elementSize,
-      onAnimationComplete: _onAnimationComplete,
-    ),
+    child: AdvancedAnimatedBallWidget(animatedBall: animatedBall, elementSize: _elementSize, onAnimationComplete: _onAnimationComplete),
   );
   void _onAnimationComplete() {
     _engine.completeAnimation();
@@ -233,16 +213,9 @@ class _FieldWidgetState extends State<FieldWidget> {
     setState(() {});
   }
 
-  double _calculateOptimalElementSize(
-    BoxConstraints constraints,
-    bool isLandscape,
-    MediaQueryData mediaQuery,
-  ) {
-    final availableWidth =
-        constraints.maxWidth - AppConstants.defaultPadding * 2;
-    final availableHeight =
-        constraints.maxHeight * (isLandscape ? 0.85 : 0.95) -
-        AppConstants.statusBarHeight;
+  double _calculateOptimalElementSize(BoxConstraints constraints, bool isLandscape, MediaQueryData mediaQuery) {
+    final availableWidth = constraints.maxWidth - AppConstants.defaultPadding * 2;
+    final availableHeight = constraints.maxHeight * (isLandscape ? 0.85 : 0.95) - AppConstants.statusBarHeight;
 
     final widthBasedSize = availableWidth / (_engine.level.width + 1);
     final heightBasedSize = availableHeight / (_engine.level.height + 1);
@@ -311,14 +284,7 @@ class _FieldWidgetState extends State<FieldWidget> {
         SizedBox(
           height: _elementSize,
           child: Row(
-            children: [
-              for (int x = 0; x < _engine.level.width; x++)
-                SizedBox(
-                  width: _elementSize,
-                  height: _elementSize,
-                  child: _buildFieldElement(x, y),
-                ),
-            ],
+            children: [for (int x = 0; x < _engine.level.width; x++) SizedBox(width: _elementSize, height: _elementSize, child: _buildFieldElement(x, y))],
           ),
         ),
     ],
@@ -344,12 +310,7 @@ class _FieldWidgetState extends State<FieldWidget> {
       return Container(
         // padding: padding,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              _elementSize * AppConstants.elementBorderRadius,
-            ),
-            color: Colors.transparent,
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(_elementSize * AppConstants.elementBorderRadius), color: Colors.transparent),
         ),
       );
     }
@@ -357,18 +318,13 @@ class _FieldWidgetState extends State<FieldWidget> {
       return Container(
         // padding: padding,
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              _elementSize * AppConstants.elementBorderRadius,
-            ),
-            color: Colors.transparent,
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(_elementSize * AppConstants.elementBorderRadius), color: Colors.transparent),
         ),
       );
     }
 
     return GestureDetector(
-      onTap: () => _onElementTap(x, y),
+      onTap: () {}, // => _onElementTap(x, y),
       // onPanStart: _onDragStart,
       // onPanEnd: _onDragEnd,
       onPanUpdate: (details) => _onPanUpdate(details, x, y),
@@ -376,10 +332,7 @@ class _FieldWidgetState extends State<FieldWidget> {
         // padding: padding,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              _elementSize *
-                  ((item is Ball) ? 0.5 : AppConstants.elementBorderRadius),
-            ),
+            borderRadius: BorderRadius.circular(_elementSize * ((item is Ball) ? 0.5 : AppConstants.elementBorderRadius)),
             color: _getColorForItem(item),
             boxShadow: _getElementShadow(item),
           ),
@@ -393,21 +346,9 @@ class _FieldWidgetState extends State<FieldWidget> {
     if (item == null) return [];
 
     if (item is Block) {
-      return [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.3),
-          blurRadius: 2,
-          offset: const Offset(1, 1),
-        ),
-      ];
+      return [BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 2, offset: const Offset(1, 1))];
     } else if (item is Ball) {
-      return [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.4),
-          blurRadius: 3,
-          offset: const Offset(2, 2),
-        ),
-      ];
+      return [BoxShadow(color: Colors.black.withOpacity(0.4), blurRadius: 3, offset: const Offset(2, 2))];
     }
 
     return [];
@@ -421,10 +362,7 @@ class _FieldWidgetState extends State<FieldWidget> {
         margin: EdgeInsets.all(_elementSize * 0.15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(_elementSize * 0.25),
-          border: Border.all(
-            color: Colors.black.withOpacity(0.4),
-            width: max(2, _elementSize * 0.08),
-          ),
+          border: Border.all(color: Colors.black.withOpacity(0.4), width: max(2, _elementSize * 0.08)),
         ),
       );
     }
@@ -463,11 +401,7 @@ class _FieldWidgetState extends State<FieldWidget> {
     }
   }
 
-  bool _isDesktopPlatform() =>
-      kIsWeb ||
-      defaultTargetPlatform == TargetPlatform.windows ||
-      defaultTargetPlatform == TargetPlatform.macOS ||
-      defaultTargetPlatform == TargetPlatform.linux;
+  bool _isDesktopPlatform() => kIsWeb || defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.macOS || defaultTargetPlatform == TargetPlatform.linux;
 
   void _showDirectionMenu(int x, int y) {
     showDialog(
@@ -486,12 +420,7 @@ class _FieldWidgetState extends State<FieldWidget> {
             _buildDirectionButton('> Вправо', Direction.right, x, y),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Отмена'),
-          ),
-        ],
+        actions: [TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Отмена'))],
       ),
     );
   }
@@ -551,12 +480,7 @@ class _FieldWidgetState extends State<FieldWidget> {
   // }
 
   // В методе _buildDirectionButton
-  Widget _buildDirectionButton(
-    String text,
-    Direction direction,
-    int x,
-    int y,
-  ) => Padding(
+  Widget _buildDirectionButton(String text, Direction direction, int x, int y) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 4),
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(minimumSize: const Size(200, 48)),
