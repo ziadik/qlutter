@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Wall System')),
+    appBar: AppBar(title: const Text('Color Pool Puzzle Wall Editor.  VARTA_DEV https://ziidik.ru')),
     body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => QOOXApp(initialState: appState)));
             },
-            child: const Text('Просмотр поля'),
+            child: const Text('Играть!'),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
