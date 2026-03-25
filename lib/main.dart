@@ -6,34 +6,69 @@
 // import 'package:flutter/material.dart'
 //     as material
 //     show runApp, WidgetsFlutterBinding;
+import 'package:color_pool_puzzle/main.dart' as CPP;
 import 'package:flutter/material.dart';
 import 'package:qlutter/map_editor/map_editor.dart';
-import 'package:qlutter/map_editor/playground_ui.dart';
-import 'package:qlutter/ver_2/app.dart';
-import 'package:qlutter/ver_2/game/level_manager.dart';
-import 'package:qlutter/ver_2/models/app_state.dart';
-import 'package:qlutter/ver_2/services/storage_service.dart';
+// import 'package:qlutter/map_editor/playground_ui.dart';
+// import 'package:qlutter/ver_2/app.dart';
+// import 'package:qlutter/ver_2/game/level_manager.dart';
+// import 'package:qlutter/ver_2/models/app_state.dart';
+// import 'package:qlutter/ver_2/services/storage_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final levelManager = LevelManager();
-  await levelManager.initialize();
+  // final levelManager = LevelManager();
+  // await levelManager.initialize();
 
-  // Загружаем начальное состояние
-  final currentLevel = await StorageService.getCurrentLevel();
-  final completedLevels = await StorageService.getCompletedLevels();
+  // // Загружаем начальное состояние
+  // final currentLevel = await StorageService.getCurrentLevel();
+  // final completedLevels = await StorageService.getCompletedLevels();
 
-  final initialState = AppState(currentLevel: currentLevel, completedLevels: completedLevels, isLoading: false, levelManager: levelManager);
+  // final initialState = AppState(currentLevel: currentLevel, completedLevels: completedLevels, isLoading: false, levelManager: levelManager);
 
   //runApp(QOOXApp(initialState: initialState));
-  runApp(MaterialApp(home: HomePage(appState: initialState)));
+  //runApp(MaterialApp(home: HomePage(appState: initialState)));
+  //runApp(CPP.MyApp());
+  final app = await CPP.initialApp();
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: HomePage2(game: app)));
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({required this.appState, super.key});
+// class HomePage extends StatelessWidget {
+//   const HomePage({required this.appState, super.key});
 
-  final AppState appState;
+//   final AppState appState;
+
+//   @override
+//   Widget build(BuildContext context) => Scaffold(
+//     appBar: AppBar(title: const Text('Color Pool Puzzle Wall Editor.  VARTA_DEV https://ziidik.ru')),
+//     body: Center(
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           ElevatedButton(
+//             onPressed: () {
+//               // Navigator.push(context, MaterialPageRoute(builder: (context) => QOOXApp(initialState: appState)));
+//               //Navigator.push(context, MaterialPageRoute(builder: (context) => CPP.MyApp()));
+//             },
+//             child: const Text('Играть!'),
+//           ),
+//           const SizedBox(height: 20),
+//           ElevatedButton(
+//             onPressed: () {
+//               Navigator.push(context, MaterialPageRoute(builder: (context) => const MapEditor()));
+//             },
+//             child: const Text('Редактор карт'),
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
+
+class HomePage2 extends StatelessWidget {
+  const HomePage2({required this.game, super.key});
+  final Widget game;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -44,7 +79,8 @@ class HomePage extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => QOOXApp(initialState: appState)));
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => QOOXApp(initialState: appState)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => game));
             },
             child: const Text('Играть!'),
           ),

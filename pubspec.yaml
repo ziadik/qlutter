@@ -16,7 +16,11 @@ dependencies:
     sdk: flutter
 
   shared_preferences: ^2.5.3 
-  
+
+  color_pool_puzzle:
+    git:
+      url: https://github.com/ziadik/color_pool_puzzle.git
+      ref: main
 
   flutter_localizations:
     sdk: flutter
