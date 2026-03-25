@@ -215,7 +215,7 @@ packages:
       path: "."
       ref: main
       resolved-ref: ba2cf16512ace497aef6be88e6537fc24c7a1932
-      url: "https://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@github.com/ziadik/color_pool_puzzle.git"
+      url: "https://github.com/ziadik/color_pool_puzzle.git"
     source: git
     version: "1.0.0"
   convert:
