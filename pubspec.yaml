@@ -19,7 +19,7 @@ dependencies:
 
   color_pool_puzzle:
     git:
-      url: https://github.com/ziadik/color_pool_puzzle.git
+      url: https://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@github.com/ziadik/color_pool_puzzle.git
       ref: main
 
   flutter_localizations:
